@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sectors - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        /* Specific Styles for Sector Page Grid */
+        body {
+            background-color: #f1f8e9;
+            /* Light mint background */
+        }
+
+        .sector-title-container {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .sector-page-title {
+            color: #2E8B57;
+            /* Primary Green */
+            font-weight: 700;
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .sector-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sector-card-new {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
+
+        .sector-card-new:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(46, 139, 87, 0.2);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background-color: #e8f5e9;
+            /* Light green circle */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .sector-card-new:hover .icon-circle {
+            background-color: #c8e6c9;
+        }
+
+        .sector-icon-i {
+            color: #2e7d32;
+            /* Dark green icon */
+            font-size: 28px;
+        }
+
+        .sector-name-new {
+            font-weight: 700;
+            color: #2e7d32;
+            font-size: 16px;
+            margin: 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="family-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="family-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li class="active"><a href="family-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="family-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li><a href="family-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+        <div class="row">
+            <div class="col-md-12 sector-title-container">
+                <h2 class="sector-page-title">Select Your Income / Expense Sector</h2>
+            </div>
+        </div>
+
+        <!-- Grid Container populated by JS -->
+        <div id="sectorGrid" class="row">
+            <div class="col-xs-12 text-center">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/family-sectors.js"></script>
+
+</body>
+
+</html>

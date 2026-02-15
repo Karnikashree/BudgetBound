@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Family Members - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .summary-header-card {
+            background-color: #2E8B57;
+            /* Dark Green */
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-header-card h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .summary-header-card p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .metric-title {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Panel Colors matching screenshot */
+        .panel-inc {
+            border-color: #2E8B57;
+        }
+
+        .panel-inc>.panel-heading {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .panel-exp {
+            border-color: #e74c3c;
+        }
+
+        .panel-exp>.panel-heading {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .panel-mem {
+            border-color: #3f51b5;
+        }
+
+        .panel-mem>.panel-heading {
+            background-color: #3f51b5;
+            color: white;
+            border-color: #3f51b5;
+        }
+
+        .table>tbody>tr>td {
+            vertical-align: middle;
+            font-size: 13px;
+            padding: 14px 15px;
+        }
+
+        .table>thead>tr>th {
+            padding: 12px 15px;
+        }
+
+        .badge-surplus {
+            background-color: #2E8B57;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 11px;
+        }
+
+        .badge-deficit {
+            background-color: #e74c3c;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="family-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="family-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="family-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="family-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li><a href="family-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+
+        <!-- Month Selector (Optional, kept for functionality) -->
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-12 text-right form-inline">
+                <label>View For: </label>
+                <select id="monthSelect" class="form-control input-sm" style="width:150px;">
+                    <option value="">Loading...</option>
+                </select>
+                <button id="loadBtn" class="btn btn-success btn-sm">Go</button>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="summary-header-card">
+                    <div>
+                        <h2><i class="fa fa-pie-chart"></i> Financial Summary</h2>
+                        <p>Complete overview of family income and expenses</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-title">Total Income</div>
+                    <div class="metric-value text-success" id="totInc">₹0.00</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-title">Total Expense</div>
+                    <div class="metric-value text-danger" id="totExp">₹0.00</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-card">
+                    <div class="metric-title">Net Balance</div>
+                    <div class="metric-value" style="color:#2E8B57;" id="netBal">₹0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tables Row -->
+        <div class="row">
+            <!-- Income Summary -->
+            <div class="col-md-6">
+                <div class="panel panel-default panel-inc">
+                    <div class="panel-heading"><i class="fa fa-money"></i> Income Summary</div>
+                    <div class="panel-body p-0" style="padding:0;">
+                        <table class="table table-striped" id="incTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">#</th>
+                                    <th>Member</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-right">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="font-weight:700; background:#f9f9f9;">
+                                    <td colspan="2">Total Income</td>
+                                    <td class="text-right" id="ftTotInc">₹0.00</td>
+                                    <td class="text-right">100%</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Summary -->
+            <div class="col-md-6">
+                <div class="panel panel-default panel-exp">
+                    <div class="panel-heading"><i class="fa fa-shopping-cart"></i> Expense Summary</div>
+                    <div class="panel-body p-0" style="padding:0;">
+                        <table class="table table-striped" id="expTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">#</th>
+                                    <th>Member</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-right">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="font-weight:700; background:#f9f9f9;">
+                                    <td colspan="2">Total Expense</td>
+                                    <td class="text-right" id="ftTotExp">₹0.00</td>
+                                    <td class="text-right">100%</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Member Comparison -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-mem">
+                    <div class="panel-heading"><i class="fa fa-users"></i> Member Comparison</div>
+                    <div class="panel-body p-0" style="padding:0;">
+                        <table class="table table-hover" id="compTable">
+                            <thead>
+                                <tr>
+                                    <th>Member</th>
+                                    <th class="text-right">Income</th>
+                                    <th class="text-right">Expense</th>
+                                    <th class="text-right">Net Balance</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/family-members.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Family Profile - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css"> <!-- New dedicated CSS -->
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="family-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="family-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="family-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="family-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li class="active"><a href="family-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container profile-page-container">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading family profile...</div>
+        </div>
+
+        <!-- Empty State (shown if no family found) -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">
+                <i class="fa fa-users"></i>
+            </div>
+            <h3>No Family Account Found</h3>
+            <p>You need to create or join a family account first.</p>
+            <a href="family-signup.html" class="btn btn-success btn-lg" style="margin-top: 20px;">
+                <i class="fa fa-plus"></i> Create Family Account
+            </a>
+        </div>
+
+        <!-- Main Content (shown when family is loaded) -->
+        <div id="mainContent" style="display:none;">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="family-avatar">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div>
+                        <h2 id="pfFamilyName">Loading...</h2>
+                        <p class="profile-subtitle">Managed by <span id="pfHeadName">Loading...</span></p>
+                        <span class="profile-badge"><i class="fa fa-home"></i> Family Account</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa fa-user"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">Family Head</div>
+                        <div class="stat-value" id="statHeadName">Loading...</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa fa-users"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Members</div>
+                        <div class="stat-value" id="pfTotalMembers">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa fa-id-card"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">Family Name</div>
+                        <div class="stat-value" id="statFamilyName">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit Member Section -->
+            <div class="section-card" id="addMemberCard">
+                <h3 class="section-title">
+                    <i id="formIcon" class="fa fa-plus-circle"></i>
+                    <span id="formTitle">Add New Member</span>
+                </h3>
+
+                <form id="addMemberForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required"><i class="fa fa-user"></i> Full Name</label>
+                                <input type="text" id="newMemberName" class="form-control"
+                                    placeholder="Enter member full name" required minlength="2" maxlength="50">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="required"><i class="fa fa-handshake-o"></i> Relation</label>
+                                <select id="newMemberRelation" class="form-control" required>
+                                    <option value="">Select Relation</option>
+                                    <option value="Father">Father</option>
+                                    <option value="Mother">Mother</option>
+                                    <option value="Son">Son</option>
+                                    <option value="Daughter">Daughter</option>
+                                    <option value="Husband">Husband</option>
+                                    <option value="Wife">Wife</option>
+                                    <option value="Brother">Brother</option>
+                                    <option value="Sister">Sister</option>
+                                    <option value="Head">Head</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><i class="fa fa-birthday-cake"></i> Age</label>
+                                <input type="number" id="newMemberAge" class="form-control" placeholder="Enter age"
+                                    min="1" max="120">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><i class="fa fa-briefcase"></i> Occupation</label>
+                                <input type="text" id="newMemberOccupation" class="form-control"
+                                    placeholder="Enter occupation" maxlength="100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 30px;">
+                        <button type="button" class="btn btn-success btn-lg" id="btnSaveMember">
+                            <i id="submitIcon" class="fa fa-plus"></i>
+                            <span id="submitText">Add Member</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Members List Section -->
+            <div class="section-card">
+                <h3 class="section-title">
+                    <i class="fa fa-list"></i>
+                    Family Members
+                </h3>
+
+                <div class="members-list" id="membersList">
+                    <!-- Members will be loaded here -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyMembers" style="display: none;">
+                    <div class="empty-state-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h4 style="color: #666; margin-bottom: 15px;">No Family Members Yet</h4>
+                    <p style="margin-bottom: 20px;">Start by adding your first family member using the form above.</p>
+                </div>
+            </div>
+
+            <!-- Family Management Section -->
+            <div class="section-card danger-zone">
+                <h3 class="section-title">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    Family Management
+                </h3>
+
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom: 15px;">
+                        <a href="family-settings.html" class="btn btn-warning btn-block" style="padding: 12px;">
+                            <i class="fa fa-cog"></i>
+                            Family Settings
+                        </a>
+                        <p style="font-size: 13px; color: #666; margin-top: 5px; text-align: center;">
+                            Change family name, email, or password
+                        </p>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 15px;">
+                        <button class="btn btn-danger btn-block" id="btnDeleteAccount" style="padding: 12px;">
+                            <i class="fa fa-trash"></i>
+                            Delete Account
+                        </button>
+                        <p style="font-size: 13px; color: #666; margin-top: 5px; text-align: center;">
+                            Permanently delete family account and data
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <!-- We reuse the existing logic we built, adapted to this new structure if needed, but file name remains family-profile.js -->
+    <script src="js/family-profile.js"></script>
+
+</body>
+
+</html>

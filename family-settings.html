@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Family Settings - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css"> <!-- Reusing profile css basics -->
+    <style>
+        body {
+            background-color: #f4f6f8;
+            min-height: 100vh;
+        }
+
+        .settings-wrapper {
+            padding-top: 80px;
+            padding-bottom: 50px;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .settings-container {
+            width: 100%;
+            max-width: 900px;
+            padding: 0 15px;
+            /* Side padding for mobile */
+            margin: 0 auto;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border-top: 5px solid #2E8B57;
+        }
+
+        .settings-header {
+            background: #fff;
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            text-align: center;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 30px;
+            top: 35px;
+            color: #666;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-btn:hover {
+            color: #2E8B57;
+            text-decoration: none;
+        }
+
+        .settings-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        /* Section Cards */
+        .section-card {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: none;
+            background-color: #fff;
+        }
+
+        .section-header {
+            background: #f9f9f9;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: #2E8B57;
+        }
+
+        .section-body {
+            padding: 25px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            height: 100%;
+        }
+
+        .info-box h6 {
+            margin-top: 0;
+            color: #495057;
+            font-weight: 700;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Warning Boxes */
+        .warning-box {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            border: 1px solid #ffeeba;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Buttons */
+        .btn-save {
+            background: #2E8B57;
+            color: white;
+            width: 100%;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-save:hover {
+            background: #257345;
+            color: white;
+        }
+
+        .btn-save:active {
+            transform: translateY(1px);
+        }
+
+        .btn-danger-custom {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 6px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-danger-custom:hover {
+            background: #c9302c;
+            color: white;
+        }
+
+        /* Member Item Mini */
+        .member-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fdfdfd;
+        }
+
+        .member-avatar {
+            width: 45px;
+            height: 45px;
+            background: #e8f5e9;
+            color: #2E8B57;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+
+        .badge-head {
+            background: #2E8B57;
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            vertical-align: middle;
+        }
+
+        /* Form Controls */
+        .form-control {
+            height: 45px;
+            border-radius: 6px;
+            box-shadow: none;
+            border-color: #ddd;
+        }
+
+        .form-control:focus {
+            border-color: #2E8B57;
+            box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Modal */
+        .modal-header {
+            background: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .modal-content {
+            border-radius: 6px;
+            border: none;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .back-btn {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 15px;
+                display: inline-block;
+            }
+
+            .settings-header {
+                padding: 20px;
+                text-align: left;
+            }
+
+            .settings-header h1 {
+                font-size: 24px;
+            }
+
+            .col-md-6 {
+                margin-bottom: 20px;
+            }
+
+            .info-box {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="family-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="family-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="family-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="family-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li class="active"><a href="family-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-container"
+        style="height: 100vh; display:flex; align-items:center; justify-content:center;">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text" style="margin-top:20px;">Loading family settings...</div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="container"
+        style="display: none; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+        <div class="empty-state-icon">
+            <i class="fas fa-users-slash fa-5x text-muted mb-4"></i>
+        </div>
+        <h3 class="text-muted mb-3">No Family Found</h3>
+        <p class="text-muted mb-4">You need to create or join a family first.</p>
+        <a href="family-dashboard.html" class="btn btn-success">
+            <i class="fas fa-arrow-left me-2"></i>Go to Dashboard
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" style="display:none;">
+        <div class="settings-wrapper">
+            <div class="settings-container">
+                <!-- Settings Card -->
+                <div class="settings-card">
+                    <!-- Header -->
+                    <div class="settings-header">
+
+
+                        <h1>
+                            <i class="fas fa-cog me-2" style="color:#2E8B57;"></i> Family Settings
+                        </h1>
+                        <p class="text-muted mb-0">Manage your family account settings</p>
+                    </div>
+
+                    <!-- Body -->
+                    <div style="padding: 30px;">
+
+                        <!-- Section 1: Family Information -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-info-circle"></i> Family Information
+                                </h3>
+                            </div>
+                            <div class="section-body">
+                                <div class="row display-flex-md">
+                                    <!-- Custom flex class if using bootstrap 4, but here manual -->
+                                    <div class="col-md-6">
+                                        <div class="info-box">
+                                            <h6>
+                                                <i class="fas fa-id-card me-2"></i>Current Family Details
+                                            </h6>
+                                            <p class="mb-2">
+                                                <strong>Name:</strong> <span id="currentFamilyName"
+                                                    class="text-success">Loading...</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <strong>Head:</strong> <span id="currentFamilyHead">Loading...</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <strong>Email:</strong> <span id="currentFamilyEmail">Loading...</span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <strong>Members:</strong> <span id="currentFamilyMembers"
+                                                    class="badge">0</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"
+                                        style="display:flex; flex-direction:column; justify-content:center;">
+                                        <form id="updateFamilyNameForm">
+                                            <div class="form-group">
+                                                <label class="form-label">Change Family Name</label>
+                                                <input type="text" class="form-control" id="newFamilyName" required>
+                                                <small class="text-muted" style="display:block; margin-top:5px;">This
+                                                    will update how your family appears everywhere.</small>
+                                            </div>
+                                            <button type="submit" class="btn btn-save">
+                                                <i class="fas fa-save me-1"></i> Update Name
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Transfer Head Role -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-user-shield"></i> Transfer Head Role
+                                </h3>
+                            </div>
+                            <div class="section-body">
+                                <div class="warning-box">
+                                    <i class="fas fa-exclamation-triangle me-2"></i> <strong>Important:</strong>
+                                    Transferring head role will give another member full control over the family
+                                    account.
+                                    You will lose administrative privileges.
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="form-label">Current Head</h6>
+                                        <div class="member-item">
+                                            <div class="member-avatar" id="headAvatar">
+                                                <span>F</span>
+                                            </div>
+                                            <div class="member-info">
+                                                <div class="member-name" style="font-weight:700; color:#333;">
+                                                    <span id="headName">Loading...</span>
+                                                    <span class="badge-head ms-2">HEAD</span>
+                                                </div>
+                                                <div class="member-email text-muted" id="headEmail"
+                                                    style="font-size:12px;">Loading...</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form id="transferForm">
+                                            <div class="form-group">
+                                                <label class="form-label">Select New Family Head</label>
+                                                <select class="form-control" id="newHeadSelect" required>
+                                                    <option value="">-- Select a member --</option>
+                                                    <!-- Options will be populated by JavaScript -->
+                                                </select>
+                                                <small class="text-muted">Only existing family members can be
+                                                    selected.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Your Password (for verification)</label>
+                                                <input type="password" class="form-control" id="transferPassword"
+                                                    required>
+                                            </div>
+                                            <button type="button" class="btn btn-danger-custom"
+                                                id="btnOpenTransferModal">
+                                                <i class="fas fa-user-shield me-1"></i> Transfer Head Role
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Account Settings -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-user-cog"></i> Account Settings
+                                </h3>
+                            </div>
+                            <div class="section-body">
+                                <div class="row">
+                                    <!-- Update Email -->
+                                    <div class="col-md-6 mb-4">
+                                        <form id="updateEmailForm">
+                                            <h6 class="mb-3 form-label">Update Email Address</h6>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="newEmail"
+                                                    placeholder="New Email Address" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-save">
+                                                <i class="fas fa-envelope me-1"></i> Update Email
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <!-- Update Password -->
+                                    <div class="col-md-6 mb-4">
+                                        <form id="updatePasswordForm">
+                                            <h6 class="mb-3 form-label">Change Password</h6>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" id="newPassword"
+                                                    placeholder="New Password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" id="confirmPassword"
+                                                    placeholder="Confirm New Password" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-save" style="margin-top:10px;">
+                                                <i class="fas fa-key me-1"></i> Update Password
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Danger Zone -->
+                        <div class="section-card" style="border-color: #f5c6cb;">
+                            <div class="section-header" style="background: rgba(244, 67, 54, 0.1);">
+                                <h3 class="section-title text-danger" style="color:#d9534f;">
+                                    <i class="fas fa-exclamation-triangle"></i> Danger Zone
+                                </h3>
+                            </div>
+                            <div class="section-body">
+                                <div class="danger-box">
+                                    <i class="fas fa-skull-crossbones me-2"></i> <strong>Warning:</strong>
+                                    These actions are irreversible. Please proceed with caution.
+                                </div>
+
+                                <div class="mt-4">
+                                    <h6 class="mb-3" style="font-weight:700; color:#d9534f;">Delete Family Account</h6>
+                                    <p class="text-muted mb-3">This will permanently delete your family account,
+                                        all members, sectors, incomes, and expenses. This action cannot be undone.</p>
+                                    <button type="button" class="btn btn-danger-custom" id="btnOpenDeleteModal"
+                                        style="max-width:200px;">
+                                        <i class="fas fa-trash me-1"></i> Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfer Confirmation Modal -->
+    <div class="modal fade" id="transferModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle me-2"></i> Confirm Head Role Transfer
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle me-2"></i> <strong>Are you sure?</strong>
+                        This action cannot be undone. You will lose administrative privileges.
+                    </div>
+                    <p>You are about to transfer the head role to another member. This member will have full control
+                        over:</p>
+                    <ul>
+                        <li>Family settings and preferences</li>
+                        <li>Member management (add/remove members)</li>
+                        <li>All financial data and budgets</li>
+                        <li>Account deletion privileges</li>
+                    </ul>
+                    <p class="mb-0"><strong>Do you want to proceed?</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fas fa-times me-1"></i> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger-custom" id="confirmTransferBtn">
+                        <i class="fas fa-user-shield me-1"></i> Yes, Transfer Role
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-skull-crossbones me-2"></i> Delete Family Account
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-radiation me-2"></i> <strong>Danger!</strong>
+                        This action is permanent and cannot be undone.
+                    </div>
+                    <p>You are about to permanently delete your family account. This will:</p>
+                    <ul>
+                        <li>Delete all family members</li>
+                        <li>Delete all sectors and their data</li>
+                        <li>Delete all income and expense records</li>
+                        <li>Remove all financial history</li>
+                        <li>Delete your family profile permanently</li>
+                    </ul>
+                    <form id="deleteForm">
+                        <div class="form-group">
+                            <label class="form-label">Type "DELETE MY ACCOUNT" to confirm</label>
+                            <input type="text" class="form-control" id="confirmText" placeholder="DELETE MY ACCOUNT"
+                                required>
+                        </div>
+                    </form>
+                    <p class="text-danger mb-0">
+                        <i class="fas fa-exclamation-circle me-1"></i> After deletion, you will be logged out and
+                        redirected to the login page.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fas fa-times me-1"></i> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger-custom" id="confirmDeleteBtn">
+                        <i class="fas fa-trash me-1"></i> Permanently Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- jQuery + Bootstrap 3 JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+
+    <!-- Custom Logic -->
+    <script src="js/family-settings.js"></script>
+</body>
+
+</html>

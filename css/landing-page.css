@@ -1,0 +1,403 @@
+:root {
+    --primary-green: #2E8B57;
+    --dark-green: #1B5E20;
+    --light-green: #4CAF50;
+    --lighter-green: #81C784;
+    --mint-green: #C8E6C9;
+    --emerald: #388E3C;
+    --gradient-green: linear-gradient(135deg, #2E8B57 0%, #4CAF50 100%);
+    --gradient-dark: linear-gradient(135deg, #1B5E20 0%, #2E8B57 100%);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #f1f8e9, #e8f5e9);
+    padding-top: 70px;
+    color: #333;
+}
+
+
+.navbar-default {
+    background: var(--dark-green) !important;
+    border: none;
+    box-shadow: 0 4px 20px rgba(27, 94, 32, 0.15);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav>li>a {
+    color: white !important;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 15px 20px !important;
+}
+
+.navbar-nav>li>a:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 4px;
+    transform: translateY(-2px);
+}
+
+.navbar-toggle .icon-bar {
+    background-color: white !important;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+}
+
+.main-section {
+    margin-top: 50px;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(46, 139, 87, 0.1);
+    margin-bottom: 40px;
+    border: 1px solid #e8f5e9;
+}
+
+.main-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: var(--dark-green);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.main-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-green);
+    border-radius: 2px;
+}
+
+.portal-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.portal-block {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(46, 139, 87, 0.15);
+    text-align: center;
+    flex: 1 1 300px;
+    max-width: 450px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.portal-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-green);
+}
+
+.portal-block:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(46, 139, 87, 0.25);
+    border-color: var(--light-green);
+}
+
+.portal-block h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
+.portal-block h3 i {
+    margin-right: 10px;
+    font-size: 28px;
+    vertical-align: middle;
+}
+
+.portal-block p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+
+.portal-btn {
+    display: inline-block;
+    padding: 12px 35px;
+    font-size: 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    background: var(--gradient-green);
+    transition: all 0.3s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+}
+
+.portal-btn:hover {
+    background: var(--gradient-dark);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 139, 87, 0.4);
+    text-decoration: none;
+}
+
+.portal-btn:active {
+    transform: translateY(-1px);
+}
+
+.container.features-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features-section {
+    margin: 80px 0;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(46, 139, 87, 0.1);
+    border: 1px solid #e8f5e9;
+    width: 100%;
+}
+
+.features-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--dark-green);
+    text-align: center;
+    width: 100%;
+}
+
+.features-section>p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.features-section .row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.features-section .col-md-4,
+.features-section .col-sm-6 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.feature-box {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(46, 139, 87, 0.2);
+    border-color: var(--light-green);
+}
+
+.feature-box i {
+    font-size: 48px;
+    color: var(--light-green);
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background: #f1f8e9;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.feature-box:hover i {
+    background: var(--gradient-green);
+    color: white;
+    transform: scale(1.1);
+}
+
+.feature-box h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--dark-green);
+    width: 100%;
+}
+
+.feature-box p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    width: 100%;
+}
+
+.footer {
+    background: var(--gradient-dark);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 60px;
+    border-top: 5px solid var(--light-green);
+}
+
+.footer h4 {
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-section,
+.features-section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f8e9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--light-green);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .portal-block {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .main-title {
+        font-size: 28px;
+    }
+
+    .features-section h2 {
+        font-size: 28px;
+    }
+
+    .portal-row {
+        gap: 30px;
+    }
+
+    /* Center feature boxes on mobile */
+    .features-section .col-md-4,
+    .features-section .col-sm-6 {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 30px;
+    }
+
+    .container.features-section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 24px;
+    }
+
+    .portal-btn {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+
+    .feature-box {
+        padding: 25px 20px;
+    }
+
+    .features-section {
+        padding: 40px 15px;
+        margin: 40px 0;
+    }
+
+    .footer {
+        padding: 25px 0;
+        margin-top: 40px;
+    }
+}

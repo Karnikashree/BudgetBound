@@ -1,0 +1,348 @@
+/* ===== ZERO-BASE GREEN THEME ===== */
+:root {
+    --primary-green: #2E8B57;
+    --dark-green: #1B5E20;
+    --light-green: #4CAF50;
+    --lighter-green: #81C784;
+    --mint-green: #C8E6C9;
+    --emerald: #388E3C;
+    --expense-red: #e74c3c;
+    --income-green: #2ecc71;
+    --dashboard-blue: #3498db;
+    --warning-orange: #f39c12;
+    --purple: #9b59b6;
+    --gradient-green: linear-gradient(135deg, #2E8B57 0%, #4CAF50 100%);
+    --gradient-dark: linear-gradient(135deg, #1B5E20 0%, #2E8B57 100%);
+    --card-shadow: 0 10px 30px rgba(46, 139, 87, 0.1);
+    --hover-shadow: 0 15px 35px rgba(46, 139, 87, 0.15);
+}
+
+body {
+    background: linear-gradient(to bottom, #f1f8e9, #e8f5e9);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-default {
+    background: var(--gradient-dark) !important;
+    border: none;
+    box-shadow: 0 4px 20px rgba(27, 94, 32, 0.15);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand small {
+    color: var(--mint-green) !important;
+    opacity: 0.9;
+}
+
+.navbar-nav>li>a {
+    color: white !important;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 15px 20px !important;
+}
+
+.navbar-nav>li>a:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+    background-color: transparent !important;
+    color: var(--mint-green) !important;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: white !important;
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Container */
+.dashboard-container {
+    margin-top: 80px;
+    padding-bottom: 40px;
+}
+
+/* ===== NEW DASHBOARD STYLES ===== */
+
+/* Header Card */
+.header-card {
+    background: white;
+    border-radius: 12px;
+    /* Smoother corner */
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid var(--primary-green);
+    /* Green top border matches image approximation if any, or just aesthetic */
+    margin-bottom: 30px;
+    position: relative;
+    border-left: 5px solid var(--primary-green);
+    /* Matching the image's rounded left border look slightly */
+    /* Actually image shows rounded card with a green vertical line on left maybe? Or just a top border? 
+       Let's go with top border as commonly seen in these themes, or left border. 
+       The image shows a full card with potentially a green accent. I'll stick to a clean card. */
+    border: none;
+    border-left: 6px solid var(--primary-green);
+}
+
+.header-card h2 {
+    color: var(--dark-green);
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.profile-badge {
+    display: inline-block;
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Stat Cards (Grid) */
+.stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    transition: transform 0.3s;
+    border-top: 4px solid transparent;
+    /* controlled by modifiers */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.border-green {
+    border-top-color: var(--primary-green);
+}
+
+.stat-card.border-red {
+    border-top-color: var(--expense-red);
+}
+
+.stat-card.border-blue {
+    border-top-color: var(--dashboard-blue);
+}
+
+.stat-card.border-orange {
+    border-top-color: var(--warning-orange);
+}
+
+.stat-card.border-purple {
+    border-top-color: var(--purple);
+}
+
+.stat-icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #555;
+    /* Default icon color, or match border? Image shows green icons mostly */
+}
+
+.border-green .stat-icon {
+    color: var(--primary-green);
+}
+
+.border-red .stat-icon {
+    color: var(--expense-red);
+}
+
+/* Though image shows green cart? keeping consistent with theme or image? Image shows green cart. I will use green for all primary icons if desired, but red for expense makes sense. I'll stick to image: image shows Green Members, Green Income, Green Cart(Expense?), Green Savings, Green Rate, Green Transactions. All Green Icons? 
+Wait, looking closely at screenshot... 
+Members: Green users icon.
+Income: Green bill icon.
+Expense: Green cart icon.
+Savings: Green chart icon.
+Rate: Green Percent.
+Transactions: Green arrows.
+Okay, ALL ICONS ARE GREEN. The borders change color. */
+.stat-icon {
+    color: var(--primary-green) !important;
+}
+
+.stat-title {
+    color: #888;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.stat-sub {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Action Cards */
+.action-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.action-icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 24px;
+    color: var(--primary-green);
+}
+
+.action-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-top: 0;
+}
+
+.action-card p {
+    color: #777;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.btn-action {
+    background: var(--primary-green);
+    color: white;
+    border-radius: 4px;
+    /* Image shows slightly routed sq buttons or rounded? Image shows rounded rectangle, strict corners usually means small radius */
+    padding: 8px 25px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.btn-action:hover {
+    background: var(--dark-green);
+    color: white;
+}
+
+/* Wide Content Cards */
+.content-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--dark-green);
+}
+
+.content-header i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.content-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Sector Table Styles */
+.sector-table-header {
+    background-color: #f1f8e9;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--dark-green);
+    font-size: 12px;
+}
+
+.sector-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.sector-row:last-child {
+    border-bottom: none;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: #999;
+}
+
+.empty-state i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+}
+
+.modal-header {
+    background: var(--gradient-green);
+    color: white;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 15px 20px;
+}
+
+/* Utility */
+.text-success {
+    color: var(--primary-green) !important;
+}
+
+.text-danger {
+    color: var(--expense-red) !important;
+}

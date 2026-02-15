@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Family Transactions - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="family-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="family-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="family-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="family-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li><a href="family-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3 class="panel-title"><i class="fa fa-list"></i> Family Transactions</h3>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addTransactionModal">
+                            <i class="fa fa-plus"></i> Add Expense
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Filters -->
+                        <div class="row" style="margin-bottom: 20px;">
+                            <div class="col-md-3">
+                                <label>Member</label>
+                                <select id="filterMember" class="form-control">
+                                    <option value="all">All Members</option>
+                                    <!-- Populated dynamically if possible, or usually just static in this basic version -->
+                                    <option value="Me">Me</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Type</label>
+                                <select id="filterType" class="form-control">
+                                    <option value="all">All</option>
+                                    <option value="expense">Expense</option>
+                                    <option value="income">Contribution</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Category</label>
+                                <select id="filterCategory" class="form-control">
+                                    <option value="all">All</option>
+                                    <option value="Housing">Housing</option>
+                                    <option value="Groceries">Groceries</option>
+                                    <option value="Utilities">Utilities</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Sort By</label>
+                                <select id="sortBy" class="form-control">
+                                    <option value="date-desc">Newest First</option>
+                                    <option value="amount-desc">Highest Amount</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Paid By / Received By</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th class="text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionsList">
+                                    <tr>
+                                        <td colspan="6" class="text-center">Loading...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal omitted for brevity, user can use dashboard modal concepts, 
+         or I should include it. I'll include a simplified one. -->
+    <div class="modal fade" id="addTransactionModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Family Transaction</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addTransactionForm">
+                        <div class="btn-group btn-group-justified" data-toggle="buttons" style="margin-bottom:15px;">
+                            <label class="btn btn-default active" id="typeExpenseBtn"><input type="radio" name="type"
+                                    value="expense" checked> Expense</label>
+                            <!-- Note: Fixed value/name usage from previous files -->
+                            <label class="btn btn-default" id="typeIncomeBtn"><input type="radio" name="type"
+                                    value="income">
+                                Income</label>
+                        </div>
+                        <input type="number" class="form-control" id="amount" placeholder="Amount"
+                            style="margin-bottom:10px;">
+                        <input type="date" class="form-control" id="date" style="margin-bottom:10px;">
+                        <div class="row" style="margin-bottom:10px;">
+                            <div class="col-sm-12">
+                                <label id="txnMemberLabel">Paid By</label>
+                                <select id="txnMemberSelect" class="form-control">
+                                    <option value="Me">Me</option>
+                                    <option value="new">+ Add New Member</option>
+                                </select>
+                                <input type="text" id="txnMemberInput" class="form-control" placeholder="Enter Name"
+                                    style="display:none; margin-top:5px;">
+                            </div>
+                        </div>
+                        <select class="form-control" id="category" style="margin-bottom:10px;">
+                            <option value="Groceries">Groceries</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Food">Food</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="text" class="form-control" id="description" placeholder="Description">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="saveTransactionBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/family-transactions.js"></script>
+</body>
+
+</html>

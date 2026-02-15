@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Family Login - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/individual-login.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR - MATCHING INDIVIDUAL LOGIN -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">BudgetBound</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa fa-info-circle"></i> About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fa fa-users"></i>
+                <h2>Family Login</h2>
+                <p>Welcome to BudgetBound Family</p>
+            </div>
+
+            <div class="login-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fa fa-envelope input-icon"></i>
+                            <input type="email" id="email" class="form-control" placeholder="family@example.com"
+                                required>
+                        </div>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fa fa-lock input-icon"></i>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                                required>
+                            <button type="button" class="password-toggle" id="togglePassword">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#" onclick="showForgotPassword()">Forgot password?</a>
+                    </div>
+
+                    <div class="loader" id="formLoader">
+                        <div class="loader-spinner"></div>
+                        <p>Signing in...</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-login" id="loginBtn">
+                        <i class="fa fa-sign-in"></i> Login
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    Don't have a family account? <a href="family-signup.html">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Toast Template -->
+    <div id="toast-template" style="display: none;">
+        <div class="toast">
+            <span class="toast-icon"></span>
+            <span class="toast-body"></span>
+            <button class="btn-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+
+    <script src="js/family-login.js"></script>
+
+</body>
+
+</html>

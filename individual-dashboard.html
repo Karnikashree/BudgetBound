@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - BudgetBound</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/individual-dashboard.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="individual-dashboard.html" class="navbar-brand">BudgetBound</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="individual-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li><a href="individual-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="individual-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li><a href="individual-profile.html"><i class="fa fa-users"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+
+        <!-- Header Card -->
+        <div class="header-card">
+            <h2><i class="fa fa-tachometer"></i> Personal Dashboard</h2>
+            <p>Welcome back! Here's your financial overview</p>
+            <div class="profile-badge">
+                <i class="fa fa-user-circle"></i> Hello, <span id="userName">User</span>!
+            </div>
+        </div>
+
+        <!-- Stats Grid Use DOM from JS to fill values, structure here -->
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-green">
+                    <i class="fa fa-balance-scale stat-icon"></i>
+                    <div class="stat-title">Current Balance</div>
+                    <div class="stat-value text-success">₹<span id="dispBalance">0</span></div>
+                    <div class="stat-sub">Total Available</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-green">
+                    <i class="fa fa-money stat-icon"></i>
+                    <div class="stat-title">Monthly Income</div>
+                    <div class="stat-value text-success">₹<span id="dispIncome">0</span></div>
+                    <div class="stat-sub">This month</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-red">
+                    <i class="fa fa-shopping-cart stat-icon"></i>
+                    <div class="stat-title">Monthly Expense</div>
+                    <div class="stat-value text-danger">₹<span id="dispExpense">0</span></div>
+                    <div class="stat-sub">This month</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-blue">
+                    <i class="fa fa-bank stat-icon"></i>
+                    <div class="stat-title">Total Savings</div>
+                    <div class="stat-value">₹<span id="dispSavings">0</span></div>
+                    <div class="stat-sub">Lifetime Net Worth</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-orange">
+                    <i class="fa fa-percent stat-icon"></i>
+                    <div class="stat-title">Savings Rate</div>
+                    <div class="stat-value"><span id="dispSavingsRate">0</span>%</div>
+                    <div class="stat-sub">Of income saved</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="stat-card border-purple">
+                    <i class="fa fa-exchange stat-icon"></i>
+                    <div class="stat-title">Total Transactions</div>
+                    <div class="stat-value" id="dispTxnCount">0</div>
+                    <div class="stat-sub">All time</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="action-card">
+                    <div class="action-icon-circle"><i class="fa fa-download"></i></div>
+                    <h3>Export Data</h3>
+                    <p>Download all financial data as CSV</p>
+                    <button class="btn btn-action" id="exportBtn">Export All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sector Summary -->
+        <div class="content-card">
+            <div class="content-header">
+                <i class="fa fa-pie-chart"></i>
+                <h3>Sector-wise Summary</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table" id="sectorSummaryTable">
+                    <thead>
+                        <tr>
+                            <th>Sector</th>
+                            <th class="text-success">Income</th>
+                            <th class="text-danger">Expenses</th>
+                            <th>Net</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sectorSummaryBody">
+                        <!-- Loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="noSectorData" class="empty-state" style="display: none;">
+                <i class="fa fa-pie-chart"></i>
+                <h4>No sector data yet</h4>
+                <p>Add transactions in different sectors to see the breakdown</p>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="content-card">
+            <div class="content-header">
+                <i class="fa fa-history"></i>
+                <h3>Recent Activity</h3>
+            </div>
+            <div id="recentActivityContainer">
+                <div class="empty-state">
+                    <i class="fa fa-inbox"></i>
+                    <h4>No recent activity</h4>
+                    <p>Start by adding your first transaction</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/individual-dashboard.js"></script>
+
+</body>
+
+</html>

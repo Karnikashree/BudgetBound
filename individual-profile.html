@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Profile - BudgetBound</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/individual-profile.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR - FIXED FOR INDIVIDUAL ACCOUNT -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="individual-dashboard.html">BudgetBound</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="individual-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="individual-sectors.html"><i class="fa fa-folder-open"></i> Sectors</a></li>
+                    <li><a href="individual-history.html"><i class="fa fa-history"></i> History</a></li>
+                    <li class="active"><a href="individual-profile.html"><i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="index.html" id="logoutBtn"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="avatar-container">
+                <div class="avatar-circle" id="userInitial">
+                    U
+                </div>
+                <div class="profile-info">
+                    <h1 id="userName">Loading...</h1>
+                    <p class="profile-email" id="userEmail">Loading email...</p>
+                    <span class="profile-badge"><i class="fa fa-user"></i> Individual Account</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Column Layout -->
+        <div class="single-column-layout">
+            <!-- Personal Information Card -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <h3><i class="fa fa-user-circle"></i> Personal Information</h3>
+                </div>
+
+                <form id="profileForm">
+                    <input type="hidden" id="userId" value="">
+
+                    <div class="form-group">
+                        <label><i class="fa fa-user"></i> Full Name</label>
+                        <input type="text" id="userNameInput" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa fa-envelope"></i> Email Address</label>
+                        <div class="readonly-field">
+                            <span id="userEmailDisplay">Loading...</span>
+                            <small>Cannot be changed</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa fa-phone"></i> Phone Number</label>
+                        <input type="text" id="phoneNumber" class="form-control" placeholder="Enter phone number">
+                    </div>
+
+                    <div class="password-section">
+                        <h4><i class="fa fa-lock"></i> Change Password</h4>
+                        <p class="help-text">Leave blank to keep current password</p>
+
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" id="currentPassword" class="form-control"
+                                placeholder="Enter current password">
+                        </div>
+
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" id="newPassword" class="form-control"
+                                placeholder="Enter new password (min 8 characters)" minlength="8">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confirmPassword" class="form-control"
+                                placeholder="Confirm new password">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success btn-block" id="saveBtn">
+                            <i class="fa fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Danger Zone Card -->
+            <div class="info-card danger-card">
+                <div class="card-header">
+                    <h3><i class="fa fa-exclamation-triangle"></i> Danger Zone</h3>
+                </div>
+
+                <div class="danger-actions">
+                    <button class="btn btn-danger btn-block" id="deleteAccountBtn">
+                        <i class="fa fa-trash"></i>
+                        Delete My Account
+                    </button>
+                    <p class="danger-note">This will permanently delete your account and all data</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Toast Template -->
+    <div id="toast-template" style="display: none;">
+        <div class="toast">
+            <span class="toast-icon"></span>
+            <span class="toast-body"></span>
+            <button class="btn-close">&times;</button>
+            <div class="toast-progress"></div>
+        </div>
+    </div>
+
+    <script src="js/individual-profile.js"></script>
+</body>
+
+</html>
